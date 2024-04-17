@@ -106,7 +106,7 @@ class APIManager():
 
     def instagram_subscribers(self, url:str, quantity: int) -> dict:
         """
-        params: url - ссылка на группу https://www.instagram.com/your_login/
+        params: url - ссылка на страницу https://www.instagram.com/your_login/
         params: quantity - количество подписчиков  1000
         return: dict - номер заказа  {'order': 66424299}
         Получение информации о заказе просмотров
