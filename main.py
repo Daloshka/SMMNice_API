@@ -32,5 +32,4 @@ class SMMNice():
 
 if __name__ == "__main__":
     smm = SMMNice()
-    print(smm.cut_https("http://google.com"))
-    #print(smm.order_views(order_url=""))
+    
