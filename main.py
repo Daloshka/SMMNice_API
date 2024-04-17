@@ -1,11 +1,11 @@
 import requests
 
-# СОЗДАЙТЕ ФАЙЛ config.py И ПОМЕСТИТЕ В НЕГО СВОЙ API ТОКЕН с сайта https://goo.su/zJLQac5
+# ПОМЕСТИТЕ В config.py СВОЙ API_TOKEN с сайта https://goo.su/zJLQac5
 from config import API_TOKEN 
 
 
 
-class SMMNice():
+class APIManager():
     def __init__(self):
         self.token = API_TOKEN
 
@@ -26,21 +26,33 @@ class SMMNice():
         data = response.json()
         return data
 
-    def order_post_views(self, url:str) -> dict:
+    def order_post_views(self, url:str, quantity: int) -> dict:
         """
-        params: url - ссылка на пост
-        return: dict - 1/0 (успешно/неуспешно)
+        params: url - ссылка на пост https://vk.com/wall-213538534_86
+        params: quantity - количество просмотров  1000
+        return: dict - номер заказа  {'order': 66424299}
         Получение информации о заказе просмотров
         """
         order_url = self.cut_https(url)
-        url = f"https://smmnice.ru/api/v2?action=add&service=2341&link={order_url}&quantity=100&key={self.token}"
+        url = f"https://smmnice.ru/api/v2?action=add&service=2341&link={order_url}&quantity={quantity}&key={self.token}"
+        response = requests.get(url)
+        data = response.json()
+        return data
+    
+    def order_video_views(self, url:str, quantity: int) -> dict:
+        """
+        params: url - ссылка на пост https://vk.com/wall-213538534_86
+        params: quantity - количество просмотров   1000
+        return: dict - номер заказа  {'order': 66424299}
+        Получение информации о заказе просмотров
+        """
+        order_url = self.cut_https(url)
+        url = f"https://smmnice.ru/api/v2?action=add&service=2338&link={order_url}&quantity={quantity}&key={self.token}"
         response = requests.get(url)
         data = response.json()
         return data
 
 
 if __name__ == "__main__":
-    smm = SMMNice()
+    smm = APIManager()
     
-    # TEST
-    #print(smm.order_views(order_url=""))
